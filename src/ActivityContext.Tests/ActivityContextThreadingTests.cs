@@ -22,11 +22,11 @@ namespace ActivityContext.Tests
             var gate1 = new ManualResetEvent(false);
             var gate2 = new ManualResetEvent(false);
 
-            using (ActivityContext.Activity(activityName, activityId1))
+            using (new Activity(activityName, activityId1))
             {
                 var t1 = new Thread(() =>
                 {
-                    using (ActivityContext.Activity(activityName, activityId2))
+                    using (new Activity(activityName, activityId2))
                     {
                         // Flag activity scope is created
                         gate1.Set();
@@ -42,9 +42,9 @@ namespace ActivityContext.Tests
                     gate1.WaitOne();
 
                     // Assert only the parent activity is visible here.
-                    var activities = ActivityContext.GetCurrentActivities();
-                    Assert.Equal(1, activities.Length);
-                    Assert.Equal(activityId1, activities[0].Value);
+                    var activities = Activity.GetCurrentActivities();
+                    Assert.Equal(1, activities.Count);
+                    Assert.Equal(activityId1, activities[0].Id);
 
                     // Flag assertion are completed
                     gate2.Set();

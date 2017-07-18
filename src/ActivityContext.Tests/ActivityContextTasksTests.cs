@@ -21,11 +21,11 @@ namespace ActivityContext.Tests
             var gate1 = new TaskCompletionSource<bool>();
             var gate2 = new TaskCompletionSource<bool>();
 
-            using (ActivityContext.Activity(activityName, activityId1))
+            using (new Activity(activityName, activityId1))
             {
                 var t1 = Task.Run(async () =>
                 {
-                    using (ActivityContext.Activity(activityName, activityId2))
+                    using (new Activity(activityName, activityId2))
                     {
                         // Flag activity scope is created
                         gate1.SetResult(true);
@@ -41,9 +41,9 @@ namespace ActivityContext.Tests
                     await gate1.Task;
 
                     // Assert only the parent activity is visible here.
-                    var activities = ActivityContext.GetCurrentActivities();
-                    Assert.Equal(1, activities.Length);
-                    Assert.Equal(activityId1, activities[0].Value);
+                    var activities = Activity.GetCurrentActivities();
+                    Assert.Equal(1, activities.Count);
+                    Assert.Equal(activityId1, activities[0].Id);
 
                     // Flag assertion are completed
                     gate2.SetResult(true);
@@ -53,6 +53,16 @@ namespace ActivityContext.Tests
                 await t1;
                 await t2;
             }
+        }
+
+        [Fact]
+        public async Task ActivityCanBeDisposedInDifferentContext()
+        {
+            var activity = new Activity();
+            await Task.Run(() => activity.Dispose());
+
+            var activities = Activity.GetCurrentActivities();
+            Assert.Equal(0, activities.Count);
         }
     }
 }
