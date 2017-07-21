@@ -47,8 +47,8 @@ namespace ActivityContext
             Name = name ?? DefaultActivityName;
             Id = id;
 
-            // Initialize Tail to the latest non-disposed activity in the current context.
-            Tail = GetTail();
+            // Initialize Parent to the latest non-disposed activity in the current context.
+            Parent = GetParentActivity();
 
             // Set itself as the current lastly created activity in the current context.
             Context.Value = this;
@@ -67,12 +67,14 @@ namespace ActivityContext
         /// </summary>
         public Guid Id { get; }
 
-        // Reference to previous activity.
-        // Activities in single context are forming a linked list.
-        // However single activity can be referenced also from different context.
-        // To enforce thread safety, references between activities are immutable.
-        // Only mutable state of the activity is flag whether it was already disposed.
-        private Activity Tail { get; }
+        /// <summary>
+        /// Reference to previous activity.
+        /// Activities in single context are forming a linked list.
+        /// However single activity can be referenced also from different context.
+        /// To enforce thread safety, references between activities are immutable.
+        /// Only mutable state of the activity is flag whether it was already disposed.
+        /// </summary>
+        public Activity Parent { get; }
 
         /// <summary>
         /// Flag whether activity has been already disposed.
@@ -89,6 +91,7 @@ namespace ActivityContext
 
         /// <summary>
         /// Returns list of active (not disposed) Activities in the current context.
+        /// Activities are in descending order of their creation.
         /// </summary>
         public static List<Activity> GetCurrentActivities()
         {
@@ -102,7 +105,7 @@ namespace ActivityContext
                     result.Add(current);
                 }
 
-                current = current.Tail;
+                current = current.Parent;
             }
 
             result.Reverse();
@@ -120,12 +123,12 @@ namespace ActivityContext
         }
 
         // Returns the last active (not disposed) activity from the context.
-        private static Activity GetTail()
+        private static Activity GetParentActivity()
         {
             var last = Context.Value;
             while (last != null && last.IsDisposed)
             {
-                last = last.Tail;
+                last = last.Parent;
             }
 
             return last;
