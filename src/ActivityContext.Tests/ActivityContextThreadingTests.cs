@@ -13,7 +13,7 @@ namespace ActivityContext.Tests
         /// First child thread creates activity scope. Tests verifies that this activity is not visible in second child thread.
         /// </summary>
         [Fact]
-        public async Task ConcurrentThreadsDoNotAffectEachOtherContext()
+        public void ConcurrentThreadsDoNotAffectEachOtherContext()
         {
             const string activityName = "Test";
             var activityId1 = Guid.NewGuid();
