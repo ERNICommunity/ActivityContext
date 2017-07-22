@@ -3,9 +3,8 @@
 
   <PropertyGroup>
     <LangVersion>7</LangVersion>
-    <OutputPath>$(SolutionDir)\..\build\bin\$(Configuration)\$(MSBuildProjectName)</OutputPath>
-    <IntermediateOutputPath>$(SolutionDir)\..\build\obj\$(Configuration)\$(MSBuildProjectName)</IntermediateOutputPath>
-    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+    <BaseOutputPath>$(SolutionDir)\..\build\bin\$(MSBuildProjectName)</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(SolutionDir)\..\build\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
   </PropertyGroup>
-  
+
 </Project>
