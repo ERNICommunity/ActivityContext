@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="$(SolutionDir)\ActivityContext.Common.props" />
+  <Import Project="$(SolutionDir)\config\ActivityContext.Common.props" />
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>

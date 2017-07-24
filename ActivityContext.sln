@@ -3,12 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext", "ActivityContext\ActivityContext.csproj", "{1E8A77FC-BCC7-455E-9BDA-326958AD3BEF}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{213162E7-B0B6-4F71-9764-0C1AF3519164}"
-	ProjectSection(SolutionItems) = preProject
-		ActivityContext.Common.props = ActivityContext.Common.props
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext", "src\ActivityContext\ActivityContext.csproj", "{1E8A77FC-BCC7-455E-9BDA-326958AD3BEF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{954D7030-7120-4832-8224-2429E67A13E8}"
 EndProject
@@ -18,7 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Log4net", "Log4net", "{DF2D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{36232EF6-834F-40BA-869D-9B156DBC1581}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Tests", "ActivityContext.Tests\ActivityContext.Tests.csproj", "{BD7103E9-6CFA-4105-ACDA-906DA695AD97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Tests", "src\ActivityContext.Tests\ActivityContext.Tests.csproj", "{BD7103E9-6CFA-4105-ACDA-906DA695AD97}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{FA9C32F8-A0CF-4FB2-9689-8DA3D53E95DA}"
+	ProjectSection(SolutionItems) = preProject
+		config\ActivityContext.Common.props = config\ActivityContext.Common.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
