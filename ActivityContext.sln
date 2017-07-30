@@ -26,6 +26,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Integration
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Examples.NLog", "src\ActivityContext.Examples.NLog\ActivityContext.Examples.NLog.csproj", "{EA826678-8262-419F-AC3F-92C020CB4357}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Integration.log4net", "src\ActivityContext.Integration.log4net\ActivityContext.Integration.log4net.csproj", "{40F31D19-8061-46EF-91E3-F335B595C22D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityContext.Examples.log4net", "src\ActivityContext.Examples.log4net\ActivityContext.Examples.log4net.csproj", "{6013CC67-DDE9-430B-9FD0-0811123DC296}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +56,14 @@ Global
 		{EA826678-8262-419F-AC3F-92C020CB4357}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA826678-8262-419F-AC3F-92C020CB4357}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA826678-8262-419F-AC3F-92C020CB4357}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40F31D19-8061-46EF-91E3-F335B595C22D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F31D19-8061-46EF-91E3-F335B595C22D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F31D19-8061-46EF-91E3-F335B595C22D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F31D19-8061-46EF-91E3-F335B595C22D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6013CC67-DDE9-430B-9FD0-0811123DC296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6013CC67-DDE9-430B-9FD0-0811123DC296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6013CC67-DDE9-430B-9FD0-0811123DC296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6013CC67-DDE9-430B-9FD0-0811123DC296}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,5 +74,7 @@ Global
 		{9B592B07-ADDA-4950-BC7D-C601A63BA7EF} = {42B18C27-FA1C-498C-BFC4-53530127C487}
 		{E44456E0-2CBC-41BF-A6C5-EFD7C31F1C2E} = {42B18C27-FA1C-498C-BFC4-53530127C487}
 		{EA826678-8262-419F-AC3F-92C020CB4357} = {36232EF6-834F-40BA-869D-9B156DBC1581}
+		{40F31D19-8061-46EF-91E3-F335B595C22D} = {DF2DBAE1-1E95-49C1-A6C2-60FB5133C3E8}
+		{6013CC67-DDE9-430B-9FD0-0811123DC296} = {36232EF6-834F-40BA-869D-9B156DBC1581}
 	EndGlobalSection
 EndGlobal

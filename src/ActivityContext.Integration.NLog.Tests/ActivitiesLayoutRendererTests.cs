@@ -3,7 +3,6 @@ using NLog;
 using NLog.Config;
 using NLog.LayoutRenderers;
 using NLog.Targets;
-using System.IO;
 using Xunit;
 
 namespace ActivityContext.Integration.NLog.Tests
@@ -33,12 +32,8 @@ namespace ActivityContext.Integration.NLog.Tests
                 logger.Debug("Test");
                 Assert.Equal(1, target.Logs.Count);
 
-                using (var output = new StringWriter())
-                {
-                    ActivityJsonSerializer.Write(new[] { activity }, output);
-                    var expected = output.ToString();
-                    Assert.Equal(expected, target.Logs[0]);
-                }
+                var expected = ActivityJsonSerializer.Serialize(new[] { activity });
+                Assert.Equal(expected, target.Logs[0]);
             }
         }
     }

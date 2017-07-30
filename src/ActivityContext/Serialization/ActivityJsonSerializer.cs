@@ -9,6 +9,15 @@ namespace ActivityContext.Serialization
     /// </summary>
     public static class ActivityJsonSerializer
     {
+        public static string Serialize(IEnumerable<Activity> activities)
+        {
+            using (var output = new StringWriter())
+            {
+                Write(activities, output);
+                return output.ToString();
+            }
+        }
+
         /// <summary>
         /// Serializes the given activities and writes the JSON to provided TextWriter.
         /// </summary>
