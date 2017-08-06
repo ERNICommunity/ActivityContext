@@ -1,4 +1,6 @@
-﻿using NLog;
+﻿using System;
+using ActivityContext.Integration.NLog;
+using NLog;
 
 namespace ActivityContext.Examples.NLog
 {
@@ -8,17 +10,28 @@ namespace ActivityContext.Examples.NLog
 
         private static void Main()
         {
-            using (new Activity("Main"))
+            Logger.DebugActivity("Main", () =>
             {
-                Logger.Debug("Program started.");
-
                 using (new Activity("Hello"))
                 {
                     Logger.Info("Hello World!");
                 }
 
-                Logger.Debug("Program finished.");
-            }
+                try
+                {
+                    Logger.InfoActivity("FailTest", Fail);
+                }
+                catch (ActivityFailedException ex)
+                {
+                    Logger.Warn(ex, "FailTest throw an exception (as expected)");
+                }
+            });
+        }
+
+        private static void Fail()
+        {
+            // Some code...
+            throw new Exception("Something gone wrong...");
         }
     }
 }

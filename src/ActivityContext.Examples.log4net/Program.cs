@@ -1,4 +1,5 @@
-﻿using ActivityContext.Integration.log4net;
+﻿using System;
+using ActivityContext.Integration.log4net;
 using log4net;
 
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
@@ -13,17 +14,28 @@ namespace ActivityContext.Examples.log4net
         {
             GlobalContext.Properties["activities"] = new ActivitiesProperty();
 
-            using (new Activity("Main"))
+            Logger.DebugActivity("Main", () =>
             {
-                Logger.Debug("Program started.");
-
                 using (new Activity("Hello"))
                 {
                     Logger.Info("Hello World!");
                 }
 
-                Logger.Debug("Program finished.");
-            }
+                try
+                {
+                    Logger.InfoActivity("FailTest", Fail);
+                }
+                catch (ActivityFailedException ex)
+                {
+                    Logger.Warn("FailTest throw an exception (as expected)", ex);
+                }
+            });
+        }
+
+        private static void Fail()
+        {
+            // Some code...
+            throw new Exception("Something gone wrong...");
         }
     }
 }
