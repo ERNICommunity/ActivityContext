@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/github/ERNICommunity/ActivityContext.NET?branch=master&svg=true)](https://ci.appveyor.com/project/dorny/activitycontext-net/branch/master)
+
 # ActivityContext
 
 ActivityContext is a library for tracking logical context of the operations across boundaries.
