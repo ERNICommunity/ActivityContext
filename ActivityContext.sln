@@ -28,7 +28,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Examples.NL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Integration.log4net", "src\ActivityContext.Integration.log4net\ActivityContext.Integration.log4net.csproj", "{40F31D19-8061-46EF-91E3-F335B595C22D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityContext.Examples.log4net", "src\ActivityContext.Examples.log4net\ActivityContext.Examples.log4net.csproj", "{6013CC67-DDE9-430B-9FD0-0811123DC296}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Examples.log4net", "src\ActivityContext.Examples.log4net\ActivityContext.Examples.log4net.csproj", "{6013CC67-DDE9-430B-9FD0-0811123DC296}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wcf", "Wcf", "{575A538E-1291-47B3-B8C6-13FFA7558C8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityContext.Integration.Wcf", "src\ActivityContext.Integration.Wcf\ActivityContext.Integration.Wcf.csproj", "{9C948C05-EA1E-4940-9238-51A0E70C7EF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +68,10 @@ Global
 		{6013CC67-DDE9-430B-9FD0-0811123DC296}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6013CC67-DDE9-430B-9FD0-0811123DC296}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6013CC67-DDE9-430B-9FD0-0811123DC296}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C948C05-EA1E-4940-9238-51A0E70C7EF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C948C05-EA1E-4940-9238-51A0E70C7EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C948C05-EA1E-4940-9238-51A0E70C7EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C948C05-EA1E-4940-9238-51A0E70C7EF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,5 +84,7 @@ Global
 		{EA826678-8262-419F-AC3F-92C020CB4357} = {36232EF6-834F-40BA-869D-9B156DBC1581}
 		{40F31D19-8061-46EF-91E3-F335B595C22D} = {DF2DBAE1-1E95-49C1-A6C2-60FB5133C3E8}
 		{6013CC67-DDE9-430B-9FD0-0811123DC296} = {36232EF6-834F-40BA-869D-9B156DBC1581}
+		{575A538E-1291-47B3-B8C6-13FFA7558C8C} = {954D7030-7120-4832-8224-2429E67A13E8}
+		{9C948C05-EA1E-4940-9238-51A0E70C7EF9} = {575A538E-1291-47B3-B8C6-13FFA7558C8C}
 	EndGlobalSection
 EndGlobal
