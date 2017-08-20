@@ -64,5 +64,42 @@ namespace ActivityContext.Tests
             var activities = Activity.GetCurrentActivities();
             Assert.Equal(0, activities.Count);
         }
+
+        [Fact]
+        public async Task DisposedActivityIsPreservedInChildContext()
+        {
+            var gate1 = new TaskCompletionSource<bool>();
+            var gate2 = new TaskCompletionSource<bool>();
+
+            Task task;
+
+            using (new Activity("Main"))
+            {
+                task = Task.Run(async () =>
+                {
+                    using (new Activity("Child"))
+                    {
+                        // Flag Child activity is created.
+                        gate1.SetResult(true);
+
+                        // Wait until main activity is disposed.
+                        await gate2.Task;
+
+                        // Main activity is already disposed, however child activity is still active.
+                        // Therefore current context should contain both activities.
+                        Assert.Equal(2, Activity.GetCurrentActivities().Count);
+                    }
+                });
+
+                // Wait until child activity is created.
+                await gate1.Task;
+            }
+
+            // Main activity is already disposed.
+            Assert.Equal(0, Activity.GetCurrentActivities().Count);
+
+            gate2.SetResult(true);
+            await task;
+        }
     }
 }

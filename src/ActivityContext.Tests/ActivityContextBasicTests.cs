@@ -37,23 +37,17 @@ namespace ActivityContext.Tests
         }
 
         [Fact]
-        public void MultipleActivitiesWithSameName()
+        public void ActivitiesAreInCorrectOrder()
         {
-            const string activityName = "Test";
-            var activityId1 = Guid.NewGuid();
-            var activityId2 = Guid.NewGuid();
+            using (var parent = new Activity("Parent", Guid.NewGuid()))
+            using (var child = new Activity("Child", Guid.NewGuid()))
+            {
+                var activities = Activity.GetCurrentActivities();
+                Assert.Equal(2, activities.Count);
 
-            var ac1 = new Activity(activityName, activityId1);
-            var ac2 = new Activity(activityName, activityId2);
-
-            var multipleActivities = Activity.GetCurrentActivities();
-            Assert.Equal(2, multipleActivities.Count);
-
-            ac1.Dispose();
-
-            var singleActivity = Activity.GetCurrentActivities();
-            Assert.Equal(1, singleActivity.Count);
-            Assert.Equal(activityId2, singleActivity[0].Id);
+                Assert.Equal(child.Id, activities[0].Id);
+                Assert.Equal(parent.Id, activities[1].Id);
+            }
         }
     }
 }

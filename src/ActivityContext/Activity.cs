@@ -90,32 +90,36 @@ namespace ActivityContext
         }
 
         /// <summary>
-        /// Returns list of active (not disposed) Activities in the current context.
-        /// Activities are in descending order of their creation.
+        /// Returns list of active Activities in the current context.
+        /// Activity is active when it is not disposed or there is any not disposed child activity.
+        /// Activities are in descending order of their creation (most recent is the first).
         /// </summary>
         public static List<Activity> GetCurrentActivities()
         {
             var result = new List<Activity>();
 
             var current = Context.Value;
-            while (current != null)
-            {
-                if (!current.IsDisposed)
-                {
-                    result.Add(current);
-                }
 
+            // Skip completed activities
+            while (current != null && current.IsDisposed)
+            {
                 current = current.Parent;
             }
 
-            result.Reverse();
+            while (current != null)
+            {
+                result.Add(current);
+                current = current.Parent;
+            }
+
             return result;
         }
 
         /// <summary>
         /// Flags activity as disposed.
-        /// This activity won't be included in the results of future calls to <see cref="GetCurrentActivities"/>.
-        /// Activity does not hold any unmanaged resourced.
+        /// This activity won't be included in the results of future calls
+        /// to <see cref="GetCurrentActivities"/> from the current context.
+        /// Activity does not hold any unmanaged resources.
         /// </summary>
         public void Dispose()
         {

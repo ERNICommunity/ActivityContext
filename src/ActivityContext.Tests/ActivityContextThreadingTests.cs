@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace ActivityContext.Tests
@@ -58,6 +57,45 @@ namespace ActivityContext.Tests
                 t1.Join();
                 t2.Join();
             }
+        }
+
+        [Fact]
+        public void DisposedActivityIsPreservedInChildContext()
+        {
+            var gate1 = new ManualResetEvent(false);
+            var gate2 = new ManualResetEvent(false);
+
+            Thread t;
+
+            using (new Activity("Main"))
+            {
+                t = new Thread(() =>
+                {
+                    using (new Activity("Child"))
+                    {
+                        // Flag Child activity is created.
+                        gate1.Set();
+
+                        // Wait until main activity is disposed.
+                        gate2.WaitOne();
+
+                        // Main activity is already disposed, however child activity is still active.
+                        // Therefore current context should contain both activities.
+                        Assert.Equal(2, Activity.GetCurrentActivities().Count);
+                    }
+                });
+
+                t.Start();
+
+                // Wait until child activity is created.
+                gate1.WaitOne();
+            }
+
+            // Main activity is already disposed.
+            Assert.Equal(0, Activity.GetCurrentActivities().Count);
+
+            gate2.Set();
+            t.Join();
         }
     }
 }
