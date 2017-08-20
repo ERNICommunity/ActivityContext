@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext", "src\ActivityContext\ActivityContext.csproj", "{1E8A77FC-BCC7-455E-9BDA-326958AD3BEF}"
 EndProject
@@ -32,7 +32,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Examples.lo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wcf", "Wcf", "{575A538E-1291-47B3-B8C6-13FFA7558C8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityContext.Integration.Wcf", "src\ActivityContext.Integration.Wcf\ActivityContext.Integration.Wcf.csproj", "{9C948C05-EA1E-4940-9238-51A0E70C7EF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Integration.Wcf", "src\ActivityContext.Integration.Wcf\ActivityContext.Integration.Wcf.csproj", "{9C948C05-EA1E-4940-9238-51A0E70C7EF9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Integration.Wcf.Tests", "src\ActivityContext.Integration.Wcf.Tests\ActivityContext.Integration.Wcf.Tests.csproj", "{7F08C674-DBD5-4D38-9615-15958FF550BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +74,10 @@ Global
 		{9C948C05-EA1E-4940-9238-51A0E70C7EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C948C05-EA1E-4940-9238-51A0E70C7EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C948C05-EA1E-4940-9238-51A0E70C7EF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F08C674-DBD5-4D38-9615-15958FF550BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F08C674-DBD5-4D38-9615-15958FF550BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F08C674-DBD5-4D38-9615-15958FF550BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F08C674-DBD5-4D38-9615-15958FF550BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,5 +92,9 @@ Global
 		{6013CC67-DDE9-430B-9FD0-0811123DC296} = {36232EF6-834F-40BA-869D-9B156DBC1581}
 		{575A538E-1291-47B3-B8C6-13FFA7558C8C} = {954D7030-7120-4832-8224-2429E67A13E8}
 		{9C948C05-EA1E-4940-9238-51A0E70C7EF9} = {575A538E-1291-47B3-B8C6-13FFA7558C8C}
+		{7F08C674-DBD5-4D38-9615-15958FF550BE} = {575A538E-1291-47B3-B8C6-13FFA7558C8C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F1714FD6-7623-4430-BB32-2DA5AE0DD54D}
 	EndGlobalSection
 EndGlobal
