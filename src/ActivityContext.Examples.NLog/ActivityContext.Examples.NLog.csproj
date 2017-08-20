@@ -1,25 +1,26 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project>
   <Import Project="$(SolutionDir)\config\ActivityContext.Common.props" />
-  
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="NLog" Version="5.0.0-beta09" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\ActivityContext.Integration.NLog\ActivityContext.Integration.NLog.csproj" />
     <ProjectReference Include="..\ActivityContext\ActivityContext.csproj" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <None Update="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 </Project>
