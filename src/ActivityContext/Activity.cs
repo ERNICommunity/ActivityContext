@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using ActivityContext.Serialization;
 
 namespace ActivityContext
 {
@@ -94,9 +95,9 @@ namespace ActivityContext
         /// Activity is active when it is not disposed or there is any not disposed child activity.
         /// Activities are in descending order of their creation (most recent is the first).
         /// </summary>
-        public static List<Activity> GetCurrentActivities()
+        public static ActivityInfoList GetCurrentActivities()
         {
-            var result = new List<Activity>();
+            var result = new ActivityInfoList();
 
             var current = Context.Value;
 
@@ -108,7 +109,7 @@ namespace ActivityContext
 
             while (current != null)
             {
-                result.Add(current);
+                result.Add(new ActivityInfo { Id = current.Id, Name = current.Name });
                 current = current.Parent;
             }
 

@@ -1,3 +1,5 @@
+using System.IO;
+using System.Text;
 using ActivityContext.Serialization;
 using NLog;
 using NLog.Config;
@@ -32,8 +34,13 @@ namespace ActivityContext.Integration.NLog.Tests
                 logger.Debug("Test");
                 Assert.Equal(1, target.Logs.Count);
 
-                var expected = ActivityJsonSerializer.Serialize(new[] { activity });
-                Assert.Equal(expected, target.Logs[0]);
+                using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(target.Logs[0])))
+                {
+                    var activities = (ActivityInfoList)ActivityInfoList.DefaultJsonSerializer.ReadObject(ms);
+                    Assert.Equal(1, activities.Count);
+                    Assert.Equal(activity.Id, activities[0].Id);
+                    Assert.Equal(activity.Name, activities[0].Name);
+                }
             }
         }
     }

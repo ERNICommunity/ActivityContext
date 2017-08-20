@@ -1,4 +1,6 @@
-﻿using ActivityContext.Serialization;
+﻿using System.IO;
+using System.Text;
+using ActivityContext.Serialization;
 
 namespace ActivityContext.Integration.log4net
 {
@@ -7,7 +9,14 @@ namespace ActivityContext.Integration.log4net
         public override string ToString()
         {
             var activities = Activity.GetCurrentActivities();
-            return ActivityJsonSerializer.Serialize(activities);
+            var serializer = ActivityInfoList.DefaultJsonSerializer;
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                serializer.WriteObject(ms, activities);
+                var json = Encoding.UTF8.GetString(ms.ToArray());
+                return json;
+            }
         }
     }
 }

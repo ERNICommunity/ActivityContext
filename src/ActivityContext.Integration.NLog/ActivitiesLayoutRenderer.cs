@@ -1,8 +1,8 @@
-﻿using ActivityContext.Serialization;
+﻿using System.IO;
+using System.Text;
+using ActivityContext.Serialization;
 using NLog;
 using NLog.LayoutRenderers;
-using System.IO;
-using System.Text;
 
 namespace ActivityContext.Integration.NLog
 {
@@ -11,10 +11,14 @@ namespace ActivityContext.Integration.NLog
     {
         protected override void Append(StringBuilder builder, LogEventInfo logEvent)
         {
-            using (var output = new StringWriter(builder))
+            var activities = Activity.GetCurrentActivities();
+            var serializer = ActivityInfoList.DefaultJsonSerializer;
+
+            using (MemoryStream ms = new MemoryStream())
             {
-                var activities = Activity.GetCurrentActivities();
-                ActivityJsonSerializer.Write(activities, output);
+                serializer.WriteObject(ms, activities);
+                var json = Encoding.UTF8.GetString(ms.ToArray());
+                builder.Append(json);
             }
         }
     }
