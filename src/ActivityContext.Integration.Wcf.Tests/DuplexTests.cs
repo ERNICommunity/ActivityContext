@@ -4,29 +4,31 @@ using Xunit;
 
 namespace ActivityContext.Integration.Wcf.Tests
 {
-    public class ClientServerTests
+    public class DuplexTests
     {
         [Fact]
-        public void ClientActivitiesAreReceivedInService()
+        public void ServerActivitiesAreReceivedInClient()
         {
             var service = new TestService();
+            var clientService = new TestClient();
 
-            var uri = new Uri("net.pipe://localhost/ClientServerTests/DuplexTests");
+            var uri = new Uri("net.pipe://localhost/DuplexTests/TestService");
 
             using (var host = new ServiceHost(service, uri))
             {
                 host.Description.Behaviors.Add(new ActivityContextBehavior());
                 host.Open();
 
-                var clientFactory = new ChannelFactory<IClientServerServiceClient>(new NetNamedPipeBinding(), new EndpointAddress(uri));
+                var clientFactory = new DuplexChannelFactory<IDuplexServiceClient>(clientService, new NetNamedPipeBinding(), new EndpointAddress(uri));
                 clientFactory.Endpoint.EndpointBehaviors.Add(new ActivityContextBehavior());
                 var client = clientFactory.CreateChannel();
 
                 client.Open();
+                client.Init();
 
                 using (var activity = new Activity("Test"))
                 {
-                    client.Invoke(activity.Id, activity.Name);
+                    service.Client.Invoke(activity.Id, activity.Name);
                 }
 
                 client.Close();
@@ -34,15 +36,31 @@ namespace ActivityContext.Integration.Wcf.Tests
             }
         }
 
-        [ServiceContract]
-        public interface IClientServerService
+        [ServiceContract(CallbackContract = (typeof(IDuplexServiceCallback)))]
+        public interface IDuplexService
+        {
+            [OperationContract]
+            void Init();
+        }
+
+        public interface IDuplexServiceCallback
         {
             [OperationContract]
             void Invoke(Guid activityId, string activityName);
         }
 
         [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-        public class TestService : IClientServerService
+        public class TestService : IDuplexService
+        {
+            public void Init()
+            {
+                Client = OperationContext.Current.GetCallbackChannel<IDuplexServiceCallback>();
+            }
+
+            public IDuplexServiceCallback Client { get; set; }
+        }
+
+        public class TestClient : IDuplexServiceCallback
         {
             public void Invoke(Guid activityId, string activityName)
             {
@@ -53,7 +71,7 @@ namespace ActivityContext.Integration.Wcf.Tests
             }
         }
 
-        public interface IClientServerServiceClient : IClientServerService, ICommunicationObject
+        public interface IDuplexServiceClient : IDuplexService, ICommunicationObject
         { }
     }
 }

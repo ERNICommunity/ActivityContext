@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -9,7 +10,7 @@ namespace ActivityContext.Integration.Wcf
     /// <summary>
     /// Adds <see cref="ActivityContextMessageInspector"/> to clients and services.
     /// </summary>
-    public sealed class ActivityContextBehavior : IServiceBehavior, IEndpointBehavior
+    public sealed class ActivityContextBehavior : Attribute, IServiceBehavior, IEndpointBehavior
     {
         #region IServiceBehavior
 
@@ -24,7 +25,14 @@ namespace ActivityContext.Integration.Wcf
             {
                 foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
                 {
-                    endpointDispatcher.DispatchRuntime.MessageInspectors.Add(new ActivityContextMessageInspector());
+                    // Add <Activities/> header to operations invoked on callback channel.
+                    endpointDispatcher.DispatchRuntime.CallbackClientRuntime.MessageInspectors.Add(ActivityContextMessageInspector.DefaultInstance);
+
+                    foreach (var op in endpointDispatcher.DispatchRuntime.Operations)
+                    {
+                        // Initialize Logical context of operation invocation.
+                        op.CallContextInitializers.Add(ActivityContextInitializer.DefaultInstance);
+                    }
                 }
             }
         }
@@ -45,12 +53,19 @@ namespace ActivityContext.Integration.Wcf
 
         public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
         {
-            clientRuntime.ClientMessageInspectors.Add(new ActivityContextMessageInspector());
+            // Add <Activities/> header to operations invoked on server.
+            clientRuntime.ClientMessageInspectors.Add(ActivityContextMessageInspector.DefaultInstance);
+
+            foreach (var op in clientRuntime.CallbackDispatchRuntime.Operations)
+            {
+                // Initialize Logical context of operation invoked on client callback instance.
+                op.CallContextInitializers.Add(ActivityContextInitializer.DefaultInstance);
+            }
         }
 
         public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
         {
-            endpointDispatcher.DispatchRuntime.MessageInspectors.Add(new ActivityContextMessageInspector());
+            // Do nothing.
         }
 
         public void Validate(ServiceEndpoint endpoint)

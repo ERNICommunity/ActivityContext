@@ -6,7 +6,7 @@ namespace ActivityContext
 {
     /// <summary>
     /// Represents group of activities which should be applied and disposed together.
-    /// Main usecase is to apply serialized activity context received from remote partner (e.g. WCF client).
+    /// Main use case is to apply serialized activity context received from remote partner (e.g. WCF client).
     /// </summary>
     public sealed class CompositeActivity : IDisposable
     {

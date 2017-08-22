@@ -3,9 +3,13 @@ using System.Runtime.Serialization;
 
 namespace ActivityContext.Serialization
 {
-    [DataContract(Name = Strings.ActivityInfoElementName, Namespace = Strings.Namespace)]
+    [DataContract(Name = ElementName, Namespace = ElementNamespace)]
     public sealed class ActivityInfo
     {
+        public const string ElementName = "Activity";
+
+        public const string ElementNamespace = Strings.ActivityContextNamespace;
+
         [DataMember(Order = 0)]
         public Guid Id { get; set; }
 

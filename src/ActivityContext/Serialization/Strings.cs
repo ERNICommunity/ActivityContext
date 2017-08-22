@@ -1,10 +1,7 @@
 ﻿namespace ActivityContext.Serialization
 {
-    public static class Strings
+    internal static class Strings
     {
-        public const string Namespace = "http://ActivityContext/";
-
-        public const string ActivityInfoElementName = "Activity";
-        public const string ActivityInfoListElementName = "Activities";
+        public const string ActivityContextNamespace = "http://ActivityContext/";
     }
 }
