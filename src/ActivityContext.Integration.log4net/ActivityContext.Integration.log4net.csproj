@@ -1,5 +1,5 @@
 ﻿<Project>
-  <Import Project="$(SolutionDir)\config\ActivityContext.Common.props" />
+  <Import Project="$(SolutionDir)\config\ActivityContext.Libs.props" />
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
 
   <PropertyGroup>
