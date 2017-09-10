@@ -8,7 +8,7 @@ namespace ActivityContext.Integration.Wcf
     /// <summary>
     /// Message inspector which adds <see cref="ActivityContextHeader"/> with list of current activities to the message headers.
     /// </summary>
-    public sealed class ActivityContextMessageInspector : IClientMessageInspector
+    internal sealed class ActivityContextMessageInspector : IClientMessageInspector
     {
         /// <summary>
         /// <see cref="ActivityContextMessageInspector"/> is state-less. Therefore it's safe to share single instance.

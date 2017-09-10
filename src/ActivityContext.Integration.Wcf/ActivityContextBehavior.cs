@@ -8,18 +8,20 @@ using System.ServiceModel.Dispatcher;
 namespace ActivityContext.Integration.Wcf
 {
     /// <summary>
-    /// Adds <see cref="ActivityContextMessageInspector"/> to clients and services.
+    /// Enables tracking of the activity context across WCF service calls.
+    /// Current context is captured on the client and added to the message headers sent to the service.
+    /// Received activity context is applied to the logical thread context before service method implementation is executed.
     /// </summary>
     public sealed class ActivityContextBehavior : Attribute, IServiceBehavior, IEndpointBehavior
     {
         #region IServiceBehavior
 
-        public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
+        void IServiceBehavior.AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
         {
             // Do nothing.
         }
 
-        public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
             foreach (ChannelDispatcher channelDispatcher in serviceHostBase.ChannelDispatchers)
             {
@@ -37,7 +39,7 @@ namespace ActivityContext.Integration.Wcf
             }
         }
 
-        public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
             // Do nothing.
         }
@@ -46,12 +48,12 @@ namespace ActivityContext.Integration.Wcf
 
         #region IEndpointBehavior
 
-        public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
+        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
         {
             // Do nothing.
         }
 
-        public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
+        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
         {
             // Add <Activities/> header to operations invoked on server.
             clientRuntime.ClientMessageInspectors.Add(ActivityContextMessageInspector.DefaultInstance);
@@ -63,12 +65,12 @@ namespace ActivityContext.Integration.Wcf
             }
         }
 
-        public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
         {
             // Do nothing.
         }
 
-        public void Validate(ServiceEndpoint endpoint)
+        void IEndpointBehavior.Validate(ServiceEndpoint endpoint)
         {
             // Do nothing.
         }

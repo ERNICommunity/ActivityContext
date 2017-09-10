@@ -8,7 +8,7 @@ namespace ActivityContext.Integration.Wcf
     /// <summary>
     /// Looks for <Activities/> header in message and applies founded activities to the logical thread context.
     /// </summary>
-    public sealed class ActivityContextInitializer : ICallContextInitializer
+    internal sealed class ActivityContextInitializer : ICallContextInitializer
     {
         /// <summary>
         /// <see cref="ActivityContextInitializer"/> is state-less. Therefore it's safe to share single instance.
