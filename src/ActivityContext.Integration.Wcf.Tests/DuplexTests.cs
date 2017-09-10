@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ActivityContext.Integration.Wcf.Tests
@@ -7,7 +8,7 @@ namespace ActivityContext.Integration.Wcf.Tests
     public class DuplexTests
     {
         [Fact]
-        public void ServerActivitiesAreReceivedInClient()
+        public async Task ServerActivitiesAreReceivedInClient()
         {
             var service = new TestService();
             var clientService = new TestClient();
@@ -19,19 +20,23 @@ namespace ActivityContext.Integration.Wcf.Tests
                 host.Description.Behaviors.Add(new ActivityContextBehavior());
                 host.Open();
 
-                var clientFactory = new DuplexChannelFactory<IDuplexServiceClient>(clientService, new NetNamedPipeBinding(), new EndpointAddress(uri));
-                clientFactory.Endpoint.EndpointBehaviors.Add(new ActivityContextBehavior());
-                var client = clientFactory.CreateChannel();
-
-                client.Open();
-                client.Init();
-
-                using (var activity = new Activity("Test"))
+                await Task.Run(() =>
                 {
-                    service.Client.Invoke(activity.Id, activity.Name);
-                }
+                    var clientFactory = new DuplexChannelFactory<IDuplexServiceClient>(clientService, new NetNamedPipeBinding(), new EndpointAddress(uri));
+                    clientFactory.Endpoint.EndpointBehaviors.Add(new ActivityContextBehavior());
+                    var client = clientFactory.CreateChannel();
 
-                client.Close();
+                    client.Open();
+                    client.Init();
+
+                    using (var activity = new Activity("Test"))
+                    {
+                        service.Client.Invoke(activity.Id, activity.Name);
+                    }
+
+                    client.Close();
+                });
+
                 host.Close();
             }
         }
