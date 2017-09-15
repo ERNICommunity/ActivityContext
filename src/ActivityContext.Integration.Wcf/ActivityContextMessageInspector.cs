@@ -6,7 +6,7 @@ using ActivityContext.Data;
 namespace ActivityContext.Integration.Wcf
 {
     /// <summary>
-    /// Message inspector which adds <see cref="ActivityContextHeader"/> with list of current activities to the message headers.
+    /// Message inspector which adds header with list of current activities to the message headers.
     /// </summary>
     internal sealed class ActivityContextMessageInspector : IClientMessageInspector
     {
