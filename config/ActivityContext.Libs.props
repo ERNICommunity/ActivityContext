@@ -9,6 +9,10 @@
     <ProjectUrl>https://github.com/ERNICommunity/ActivityContext.NET</ProjectUrl>
     <RepositoryUrl>https://github.com/ERNICommunity/ActivityContext.NET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
