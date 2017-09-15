@@ -10,8 +10,12 @@ namespace ActivityContext
     /// </summary>
     public sealed class CompositeActivity : IDisposable
     {
-        public readonly List<Activity> _activities;
+        private readonly List<Activity> _activities;
 
+        /// <summary>
+        /// Constructs new <see cref="CompositeActivity"/>. Activities defined in <paramref name="activityInfoList"/> are applied to the current context in the reverse order.
+        /// </summary>
+        /// <param name="activityInfoList"></param>
         public CompositeActivity(ActivityInfoList activityInfoList)
         {
             _activities = new List<Activity>(activityInfoList.Count);
@@ -26,6 +30,9 @@ namespace ActivityContext
             }
         }
 
+        /// <summary>
+        /// Calls <see cref="Dispose"/> on each activity.
+        /// </summary>
         public void Dispose()
         {
             foreach (var activity in _activities)
