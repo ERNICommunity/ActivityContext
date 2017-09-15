@@ -3,6 +3,12 @@
   <Import Project="$(SolutionDir)\config\ActivityContext.Common.props" />
 
   <PropertyGroup>
+    <Version>0.1.0-alpha1</Version>
+    <Authors>Michal Dorner &amp; ERNI Community</Authors>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/ERNICommunity/ActivityContext.NET/master/LICENSE.txt</PackageLicenseUrl>
+    <ProjectUrl>https://github.com/ERNICommunity/ActivityContext.NET</ProjectUrl>
+    <RepositoryUrl>https://github.com/ERNICommunity/ActivityContext.NET</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 

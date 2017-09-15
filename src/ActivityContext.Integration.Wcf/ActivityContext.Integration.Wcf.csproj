@@ -6,6 +6,11 @@
     <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageTags>logging;tracing;WCF</PackageTags>
+    <Description>ActivityContext WCF integration.</Description>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\ActivityContext\ActivityContext.csproj" />
   </ItemGroup>

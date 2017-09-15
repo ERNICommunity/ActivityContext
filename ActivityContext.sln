@@ -37,6 +37,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Integration
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Integration.Wcf.Tests", "src\ActivityContext.Integration.Wcf.Tests\ActivityContext.Integration.Wcf.Tests.csproj", "{7F08C674-DBD5-4D38-9615-15958FF550BE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D5B9F82D-6782-449D-8F7A-0C51C1DC441C}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
