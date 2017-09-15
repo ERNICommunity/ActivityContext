@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using ActivityContext.Serialization;
+using ActivityContext.Data;
 
 namespace ActivityContext
 {

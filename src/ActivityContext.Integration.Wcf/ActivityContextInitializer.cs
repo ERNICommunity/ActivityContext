@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
-using ActivityContext.Serialization;
+using ActivityContext.Data;
 
 namespace ActivityContext.Integration.Wcf
 {

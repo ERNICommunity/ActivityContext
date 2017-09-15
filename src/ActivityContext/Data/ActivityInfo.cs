@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace ActivityContext.Serialization
+namespace ActivityContext.Data
 {
     /// <summary>
     /// Data object representing single activity.

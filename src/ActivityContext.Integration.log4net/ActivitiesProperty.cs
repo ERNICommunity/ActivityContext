@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Text;
-using ActivityContext.Serialization;
+using ActivityContext.Data;
 
 namespace ActivityContext.Integration.log4net
 {

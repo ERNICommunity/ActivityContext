@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
-namespace ActivityContext.Serialization
+namespace ActivityContext.Data
 {
     /// <summary>
     /// Data object representing list of activities.

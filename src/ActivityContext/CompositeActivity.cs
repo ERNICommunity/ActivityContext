@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ActivityContext.Serialization;
+using ActivityContext.Data;
 
 namespace ActivityContext
 {
