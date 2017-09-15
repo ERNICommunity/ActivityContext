@@ -17,6 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityContext.Tests", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{FA9C32F8-A0CF-4FB2-9689-8DA3D53E95DA}"
 	ProjectSection(SolutionItems) = preProject
+		.appveyor.yml = .appveyor.yml
 		config\ActivityContext.Common.props = config\ActivityContext.Common.props
 		config\ActivityContext.Libs.props = config\ActivityContext.Libs.props
 	EndProjectSection

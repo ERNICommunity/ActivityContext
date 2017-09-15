@@ -1,0 +1,34 @@
+version: 0.1.0-alpha1+{build}
+image: Visual Studio 2017
+configuration: Release
+
+before_build:
+- cmd: dotnet restore /p:SolutionDir=%CD%
+
+build:
+  verbosity: minimal
+  
+test_script:
+- cmd: >-
+    dotnet test /p:SolutionDir=%CD% src\ActivityContext.Tests\ActivityContext.Tests.csproj
+    dotnet test /p:SolutionDir=%CD% src\ActivityContext.Integration.NLog.Tests\ActivityContext.Integration.NLog.Tests.csproj
+    dotnet test /p:SolutionDir=%CD% src\ActivityContext.Integration.Wcf.Tests\ActivityContext.Integration.Wcf.Tests.csproj
+
+for:
+-
+  branches:
+    only:
+      - master      
+
+  # Deploy to project feed
+  nuget:
+    project_feed: true
+
+  deploy:
+    # Deploy to GitHub Releases
+    - provider: GitHub
+      artifact: /.*\.nupkg/
+      draft: true
+      prerelease: true
+      on:
+        appveyor_repo_tag: true
