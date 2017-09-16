@@ -1,0 +1,36 @@
+version: 0.1.1-alpha1+{build}
+image: Visual Studio 2017
+configuration: Release
+
+branches:
+  only:
+    - master
+    - release/*
+    - develop    
+
+before_build:
+- cmd: dotnet restore /p:SolutionDir=%CD%
+
+build:
+  verbosity: minimal
+
+test_script:
+- cmd: >-
+    dotnet test /p:SolutionDir=%CD% src\ActivityContext.Tests\ActivityContext.Tests.csproj
+
+    dotnet test /p:SolutionDir=%CD% src\ActivityContext.Integration.NLog.Tests\ActivityContext.Integration.NLog.Tests.csproj
+
+    dotnet test /p:SolutionDir=%CD% src\ActivityContext.Integration.Wcf.Tests\ActivityContext.Integration.Wcf.Tests.csproj    
+
+deploy:
+  # Deploy to GitHub Releases
+  - provider: GitHub    
+    draft: true
+    prerelease: true
+    on:
+      branch: master
+      appveyor_repo_tag: true
+  
+on_success:
+  # Deploy to Project and Account feed
+  - ps: Get-ChildItem .\build\bin\*\Release\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }

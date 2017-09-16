@@ -4,6 +4,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
+using System.Linq;
 
 namespace ActivityContext.Integration.Wcf
 {
@@ -12,7 +13,8 @@ namespace ActivityContext.Integration.Wcf
     /// Current context is captured on the client and added to the message headers sent to the service.
     /// Received activity context is applied to the logical thread context before service method implementation is executed.
     /// </summary>
-    public sealed class ActivityContextBehavior : Attribute, IServiceBehavior, IEndpointBehavior
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S3376", Justification = "This class will be rarely used as attribute")]
+    public class ActivityContextBehavior : Attribute, IServiceBehavior, IEndpointBehavior
     {
         #region IServiceBehavior
 
@@ -23,9 +25,9 @@ namespace ActivityContext.Integration.Wcf
 
         void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
-            foreach (ChannelDispatcher channelDispatcher in serviceHostBase.ChannelDispatchers)
+            foreach (var channelDispatcher in serviceHostBase.ChannelDispatchers.OfType<ChannelDispatcher>())
             {
-                foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
+                foreach (var endpointDispatcher in channelDispatcher.Endpoints)
                 {
                     // Add <Activities/> header to operations invoked on callback channel.
                     endpointDispatcher.DispatchRuntime.CallbackClientRuntime.MessageInspectors.Add(ActivityContextMessageInspector.DefaultInstance);
@@ -76,5 +78,5 @@ namespace ActivityContext.Integration.Wcf
         }
 
         #endregion
-    }
+    }    
 }

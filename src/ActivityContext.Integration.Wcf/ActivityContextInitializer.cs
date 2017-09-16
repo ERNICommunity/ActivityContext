@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
-using ActivityContext.Serialization;
+using ActivityContext.Data;
 
 namespace ActivityContext.Integration.Wcf
 {
@@ -13,7 +13,7 @@ namespace ActivityContext.Integration.Wcf
         /// <summary>
         /// <see cref="ActivityContextInitializer"/> is state-less. Therefore it's safe to share single instance.
         /// </summary>
-        public static ActivityContextInitializer DefaultInstance = new ActivityContextInitializer();
+        public static readonly ActivityContextInitializer DefaultInstance = new ActivityContextInitializer();
 
         public object BeforeInvoke(InstanceContext instanceContext, IClientChannel channel, Message message)
         {

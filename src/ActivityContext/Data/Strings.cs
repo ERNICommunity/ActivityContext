@@ -1,4 +1,4 @@
-﻿namespace ActivityContext.Serialization
+﻿namespace ActivityContext.Data
 {
     internal static class Strings
     {

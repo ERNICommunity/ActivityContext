@@ -1,19 +1,19 @@
 ﻿using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
-using ActivityContext.Serialization;
+using ActivityContext.Data;
 
 namespace ActivityContext.Integration.Wcf
 {
     /// <summary>
-    /// Message inspector which adds <see cref="ActivityContextHeader"/> with list of current activities to the message headers.
+    /// Message inspector which adds header with list of current activities to the message headers.
     /// </summary>
     internal sealed class ActivityContextMessageInspector : IClientMessageInspector
     {
         /// <summary>
         /// <see cref="ActivityContextMessageInspector"/> is state-less. Therefore it's safe to share single instance.
         /// </summary>
-        public static ActivityContextMessageInspector DefaultInstance = new ActivityContextMessageInspector();
+        public static readonly ActivityContextMessageInspector DefaultInstance = new ActivityContextMessageInspector();
 
         public object BeforeSendRequest(ref Message request, IClientChannel channel)
         {

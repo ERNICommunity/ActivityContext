@@ -1,6 +1,6 @@
 using System.IO;
 using System.Text;
-using ActivityContext.Serialization;
+using ActivityContext.Data;
 using NLog;
 using NLog.Config;
 using NLog.LayoutRenderers;
