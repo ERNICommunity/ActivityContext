@@ -13,7 +13,7 @@ namespace ActivityContext.Integration.Wcf
         /// <summary>
         /// <see cref="ActivityContextInitializer"/> is state-less. Therefore it's safe to share single instance.
         /// </summary>
-        public static ActivityContextInitializer DefaultInstance = new ActivityContextInitializer();
+        public static readonly ActivityContextInitializer DefaultInstance = new ActivityContextInitializer();
 
         public object BeforeInvoke(InstanceContext instanceContext, IClientChannel channel, Message message)
         {

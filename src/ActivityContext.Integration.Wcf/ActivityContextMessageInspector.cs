@@ -13,7 +13,7 @@ namespace ActivityContext.Integration.Wcf
         /// <summary>
         /// <see cref="ActivityContextMessageInspector"/> is state-less. Therefore it's safe to share single instance.
         /// </summary>
-        public static ActivityContextMessageInspector DefaultInstance = new ActivityContextMessageInspector();
+        public static readonly ActivityContextMessageInspector DefaultInstance = new ActivityContextMessageInspector();
 
         public object BeforeSendRequest(ref Message request, IClientChannel channel)
         {

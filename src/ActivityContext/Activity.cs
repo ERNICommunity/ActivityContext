@@ -108,7 +108,7 @@ namespace ActivityContext
 
             while (current != null)
             {
-                result.Add(new ActivityInfo { Id = current.Id, Name = current.Name });
+                result.Add(current.ToActivityInfo());
                 current = current.Parent;
             }
 
@@ -124,6 +124,15 @@ namespace ActivityContext
         public void Dispose()
         {
             IsDisposed = true;
+        }
+
+        internal ActivityInfo ToActivityInfo()
+        {
+            return new ActivityInfo
+            {
+                Id = Id,
+                Name = Name
+            };
         }
 
         // Returns the last active (not disposed) activity from the context.
