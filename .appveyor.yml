@@ -14,6 +14,10 @@ before_build:
 build:
   verbosity: minimal
 
+after_build:
+  # Deploy to Project and Account feed
+  - ps: Get-ChildItem .\build\bin\*\Release\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+
 test_script:
 - cmd: >-
     dotnet test /p:SolutionDir=%CD% src\ActivityContext.Tests\ActivityContext.Tests.csproj
@@ -24,13 +28,13 @@ test_script:
 
 deploy:
   # Deploy to GitHub Releases
-  - provider: GitHub    
+  - provider: GitHub
     draft: true
+    description: TODO
     prerelease: true
+    artifact: /.*\.nupkg/
+    auth_token:
+      secure: as3lEDnxBJSB3H7f18zFazgCh3RUwRHN2Y05dZSbGZimz8ZVa1wasO7e/Un+iu4v
     on:
       branch: master
       appveyor_repo_tag: true
-  
-on_success:
-  # Deploy to Project and Account feed
-  - ps: Get-ChildItem .\build\bin\*\Release\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
