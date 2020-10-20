@@ -2,6 +2,8 @@
 
 # ActivityContext
 
+:warning: **REPOSITORY NOT ACTIVE SINCE 2017 Dependabot alerts in git security settings disabled**
+
 ActivityContext is a library for tracking logical context of the executed code.
 
 Scope of activity is created using simple API and flows across Tasks or service calls without any additional effort as ambient context.
